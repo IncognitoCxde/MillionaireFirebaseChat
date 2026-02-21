@@ -11,27 +11,30 @@ struct ChatView: View {
 
     var body: some View {
         VStack {
-            List(viewModel.messages, id: \.message) { message in
+            ForEach(viewModel.messages, id: \.message) { message in
                 HStack {
                     if message.isSent {
-                        Spacer()
                         Text(message.message)
+                            .fontWeight(.semibold)
                             .padding(10)
                             .background(Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.bottom, 5)
+                            .padding(.leading, 330)
+                        Spacer()
                     } else {
                         Text(message.message)
                             .padding(10)
-                            .background(Color.gray.opacity(0.1))
+                            .background(Color.white)
                             .cornerRadius(10)
                             .padding(.bottom, 5)
+                            .fontWeight(.semibold)
                         Spacer()
                     }
                 }
             }
-
+            Spacer()
             HStack {
                 TextField("Type your message...", text: $viewModel.chatText)
                     .padding()
